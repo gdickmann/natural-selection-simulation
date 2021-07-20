@@ -1,50 +1,44 @@
 # Author: Biscoitinho
 import pygame
 from constants.constants import Constants
+from model.hamster import Hamster
 from settings.settings import Settings
 
-pygame.init()
+class Game:
+	Settings.set_default_configurations(pygame)
 
-screen = pygame.display.set_mode((Constants.SCREEN_HEIGHT, Constants.SCREEN_WIDTH))
-screen.fill((61, 115, 75))
+	def __init__(self):
+		pygame.init()
 
-Settings.set_default_configurations(pygame)
+		self.screen = pygame.display.set_mode((Constants.SCREEN_HEIGHT, Constants.SCREEN_WIDTH))
+		self.screen.fill((61, 115, 75))
+		self.clock = pygame.time.Clock()
 
-x = Constants.HAMSTER_X_POSITION
-y = Constants.HAMSTER_Y_POSITION
+		x = Constants.HAMSTER_X_POSITION
+		y = Constants.HAMSTER_Y_POSITION
 
-width = Constants.HAMSTER_WIDTH
-height = Constants.HAMSTER_HEIGHT
+		width = Constants.HAMSTER_WIDTH
+		height = Constants.HAMSTER_HEIGHT
 
-speed = Constants.HAMSTER_SPEED
+		speed = Constants.HAMSTER_SPEED
 
-running = True
+		hamster = Hamster(self, width / 2, height - 20)
 
-while running:
-	pygame.time.delay(10)
-	
-	for event in pygame.event.get():
-		if event.type == pygame.QUIT:
-			running = False
+		running = True
+		while running:
+			pygame.time.delay(10)
+			
+			for event in pygame.event.get():
+				if event.type == pygame.QUIT:
+					running = False
 
-	keys = pygame.key.get_pressed()
+			pygame.display.flip()
+			self.clock.tick(60)
+			self.screen.fill((61, 115, 75))
 
-	if keys[pygame.K_LEFT] and x > 0:
-		x -= speed
-		
-	if keys[pygame.K_RIGHT] and x < Constants.SCREEN_WIDTH - width:
-		x += speed
-		
-	if keys[pygame.K_UP] and y > 0:
-		y -= speed
-		
-	if keys[pygame.K_DOWN] and y < Constants.SCREEN_HEIGHT - height:
-		y += speed
-		
-	screen.fill((61, 115, 75))
-	
-	pygame.draw.rect(screen, (74, 0, 7), (x, y, width, height))
-	
-	pygame.display.update()
+			hamster.draw()
+			
+		pygame.quit()
 
-pygame.quit()
+if __name__ == '__main__':
+	game = Game()
