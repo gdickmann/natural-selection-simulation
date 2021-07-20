@@ -15,3 +15,5 @@ class Constants:
     # Initial hamster position
     HAMSTER_X_POSITION = 200
     HAMSTER_Y_POSITION = 200
+    # Hamsters quantity
+    HAMSTERS = 3

@@ -1,4 +1,4 @@
-from random import randrange
+from random import randint, random, randrange, choice
 import pygame
 
 class Hamster():
@@ -19,8 +19,9 @@ class Hamster():
                          (122, 0, 0),
                          pygame.Rect(self.x, self.y, self.size, self.size))
 
-        self.y += 1 # change it for random directions (x and y)
-        
+        self.x += randint(-1, 1)
+        self.y += randint(-1, 1)
+
 
 def generate_random_color():
     return randrange(2)
