@@ -30,4 +30,5 @@ class Food(pygame.sprite.Sprite):
 
 
 def random_initial_position():
-    return random.randrange(680)
+    # Food will spawn between map limits - 10 (so the food doesn't spawn in the edge of the map)
+    return random.randrange(Constants.SCREEN_HEIGHT - 10)

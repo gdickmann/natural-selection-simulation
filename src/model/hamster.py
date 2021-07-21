@@ -46,7 +46,11 @@ class Hamster(pygame.sprite.Sprite):
         elif self.rect.bottom > Constants.SCREEN_HEIGHT:
             self.speed.y *= -1
             self.rect.bottom = Constants.SCREEN_HEIGHT
+
         
+    def is_collided_with(self, food):
+        return self.rect.colliderect(food.rect)
+
 
 def generate_random_color():
     is_yellow = random.choice([True, False])

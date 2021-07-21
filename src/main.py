@@ -36,9 +36,9 @@ while running:
     pygame.display.flip()
     clock.tick(fps)
 
+    if pygame.sprite.groupcollide(all_hamsters, all_foods, False, False):
+        print('Oops!')
 
-def detect_hamster_food(hamster: Hamster, food: Food):
-	if pygame.sprite.spritecollideany(hamster, food):
-            print()
+
 
 pygame.quit()
