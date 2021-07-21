@@ -46,8 +46,9 @@ class Hamster(pygame.sprite.Sprite):
         elif self.rect.bottom > Constants.SCREEN_HEIGHT:
             self.speed.y *= -1
             self.rect.bottom = Constants.SCREEN_HEIGHT
-
+        
 
 def generate_random_color():
     is_yellow = random.choice([True, False])
     return (148, 108, 0) if is_yellow else (14, 48, 97)
+

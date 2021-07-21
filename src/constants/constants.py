@@ -9,11 +9,16 @@ class Constants:
     SCREEN_HEIGHT = 700
     # Hamster size
     HAMSTER_WIDTH = 20
-    HAMSTER_HEIGHT = 20
+    HAMSTER_HEIGHT = 20    
     # Hamster speed
     HAMSTER_SPEED = 1
     # Initial hamster position
     HAMSTER_X_POSITION = 200
     HAMSTER_Y_POSITION = 200
+    # Initial food position
+    FOOD_X_POSITION = 100
+    FOOD_Y_POSITION = 100
     # Hamsters quantity
-    HAMSTERS = 3
+    HAMSTERS = 10
+    # Food quantity
+    FOOD = 5
