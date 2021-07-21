@@ -6,5 +6,5 @@ class Settings:
 
 
     def set_default_configurations(pygame):
-        pygame.display.set_caption('Natural Selection')
+        pygame.display.set_caption('Natural Selection - POC')
         # TODO...
