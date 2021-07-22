@@ -1,13 +1,14 @@
 import pygame
+
 from constants.constants import Constants
 from model.food import Food
 from model.hamster import Hamster
+
 from settings.settings import Settings
 
 pygame.init()
 
 screen = pygame.display.set_mode((Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT))
-width, height = screen.get_size()
 
 Settings.set_default_configurations(pygame)
 
@@ -36,9 +37,9 @@ while running:
     pygame.display.flip()
     clock.tick(fps)
 
-    if pygame.sprite.groupcollide(all_hamsters, all_foods, False, False):
-        print('Oops!')
-
-
+    collision = pygame.sprite.groupcollide(all_hamsters, all_foods, False, False)
+    for hamster, food in collision.items():
+        hamster.eat(1)
+        food[0].kill()
 
 pygame.quit()

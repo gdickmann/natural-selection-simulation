@@ -20,7 +20,7 @@ class Hamster(pygame.sprite.Sprite):
         self.speed = Vector2(1.3, 1.3)
 
         self.color = generate_random_color()
-        self.eaten_food = True # TODO...
+        self.eaten_food = 0 # TODO...
 
         # Set sprite image
         self.image = pygame.Surface((self.size, self.size), pygame.SRCALPHA)
@@ -48,9 +48,9 @@ class Hamster(pygame.sprite.Sprite):
             self.rect.bottom = Constants.SCREEN_HEIGHT
 
         
-    def is_collided_with(self, food):
-        return self.rect.colliderect(food.rect)
-
+    def eat(self, count):
+        self.eaten_food += count
+    
 
 def generate_random_color():
     is_yellow = random.choice([True, False])
