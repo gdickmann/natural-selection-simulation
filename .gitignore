@@ -1,1 +1,3 @@
 draft/
+__pycache__/
+*.pyc
