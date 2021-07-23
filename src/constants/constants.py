@@ -13,12 +13,12 @@ class Constants:
     # Hamster speed
     HAMSTER_SPEED = 1
     # Initial hamster position
-    HAMSTER_X_POSITION = 200
-    HAMSTER_Y_POSITION = 200
+    HAMSTER_X_POSITION = 300
+    HAMSTER_Y_POSITION = 300
     # Initial food position
     FOOD_X_POSITION = 100
     FOOD_Y_POSITION = 100
     # Hamsters quantity
-    HAMSTERS = 10
+    HAMSTERS = 2
     # Food quantity
-    FOOD = 30
+    FOOD = 6

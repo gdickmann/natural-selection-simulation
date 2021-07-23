@@ -9,7 +9,7 @@ class Food(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
 
-        self.size = 13
+        self.size = 20
 		
         self.tick_size = 1
 
@@ -20,7 +20,7 @@ class Food(pygame.sprite.Sprite):
         self.color = (87, 7, 21)
 
         self.image = pygame.Surface((self.size, self.size), pygame.SRCALPHA)
-        pygame.draw.circle(self.image, self.color, (self.size // 2, self.size // 2), 13)
+        pygame.draw.circle(self.image, self.color, (self.size // 2, self.size // 2), 10)
 
         self.rect = self.image.get_rect(center = self.position)
 
@@ -31,4 +31,4 @@ class Food(pygame.sprite.Sprite):
 
 def random_initial_position():
     # Food will spawn between map limits - 10 (so the food doesn't spawn in the edge of the map)
-    return random.randrange(Constants.SCREEN_HEIGHT - 10)
+    return random.randrange(Constants.SCREEN_HEIGHT - 100)
