@@ -19,6 +19,6 @@ class Constants:
     FOOD_X_POSITION = 100
     FOOD_Y_POSITION = 100
     # Hamsters quantity
-    HAMSTERS = 2
+    HAMSTERS = 10
     # Food quantity
-    FOOD = 6
+    FOOD = 30

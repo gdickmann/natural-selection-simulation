@@ -3,7 +3,7 @@ import pygame
 from pygame.math import Vector2
 
 from constants.constants import Constants
-
+from constants.stages import Stages
 
 class Hamster(pygame.sprite.Sprite):
 
@@ -14,10 +14,10 @@ class Hamster(pygame.sprite.Sprite):
 		
         self.tick_size = 1
 
-		# Hamster initial position
+	# Hamster initial position
         self.position = Vector2(Constants.HAMSTER_X_POSITION, Constants.HAMSTER_Y_POSITION)
         # Hamster speed
-        self.speed = Vector2(1.3, 1.3)
+        self.speed = Vector2(Stages.SLOW_HAMSTER_SPEED, Stages.SLOW_HAMSTER_SPEED)
 
         self.color = generate_random_color()
         self.eaten_food = 0 # TODO...
@@ -50,7 +50,15 @@ class Hamster(pygame.sprite.Sprite):
         
     def eat(self, count):
         self.eaten_food += count
-    
+
+
+    def could_reproduce(self):
+        probability = random.randrange(100)
+        print('probability: ', str(probability))
+        if probability > 70:
+            return True
+        return False
+
 
 def generate_random_color():
     is_yellow = random.choice([True, False])
