@@ -14,15 +14,13 @@ class Hamster(pygame.sprite.Sprite):
 		
         self.tick_size = 1
 
-	# Hamster initial position
         self.position = Vector2(Constants.HAMSTER_X_POSITION, Constants.HAMSTER_Y_POSITION)
-        # Hamster speed
         self.speed = Vector2(Stages.SLOW_HAMSTER_SPEED, Stages.SLOW_HAMSTER_SPEED)
 
+        self.is_fast_hamster = False
         self.color = generate_random_color()
-        self.eaten_food = 0 # TODO...
+        self.eaten_food = 0
 
-        # Set sprite image
         self.image = pygame.Surface((self.size, self.size), pygame.SRCALPHA)
         pygame.draw.circle(self.image, self.color, (self.size // 2, self.size // 2), 20)
 
@@ -52,10 +50,9 @@ class Hamster(pygame.sprite.Sprite):
         self.eaten_food += count
 
 
-    def could_reproduce(self):
-        probability = random.randrange(100)
-        print('probability: ', str(probability))
-        if probability > 70:
+    def has_chances_of(self, probability):
+        percentage = random.randrange(100)
+        if percentage > probability:
             return True
         return False
 
