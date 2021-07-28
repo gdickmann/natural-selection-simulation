@@ -22,3 +22,6 @@ class Constants:
     HAMSTERS = 2
     # Food quantity
     FOOD = 50
+    # Probabilities
+    REPRODUCE = 70
+    BE_A_FASTER_HAMSTER = 50
