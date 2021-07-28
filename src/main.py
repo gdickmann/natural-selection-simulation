@@ -1,6 +1,8 @@
 import pygame
 import time
 
+from pygame import constants
+
 from constants.constants import Constants
 from constants.stages import Stages
 
@@ -15,6 +17,9 @@ def day_is_over(count):
 
 
 def calculate_results(hamsters):
+    fast_hamster_count = 0
+    slow_hamster_count = 0
+    
     for hamster in hamsters:
         # If a hamster eats 2 (or more) foods,
         if hamster.eaten_food >= 2:
@@ -32,10 +37,23 @@ def calculate_results(hamsters):
                 elif hamster.is_fast_hamster:
                     print('Fast cub spawned, the hamster was fast already.')
                     new_hamster.speed = pygame.Vector2(Stages.FAST_HAMSTER_SPEED, Stages.FAST_HAMSTER_SPEED)
+                    new_hamster.is_fast_hamster = True
 
                 hamsters.add(new_hamster)
         if hamster.eaten_food == 0:
             hamster.kill()
+
+        # In the end of the day, hamsters will be hungry again!
+        hamster.eaten_food = 0
+
+
+        if hamster.is_fast_hamster:
+            fast_hamster_count += 1
+        else:
+            slow_hamster_count += 1
+
+    print('Fast hamsters: ', str(fast_hamster_count))
+    print('Slow hamsters: ', str(slow_hamster_count))
 
 
 def main():
@@ -48,16 +66,14 @@ def main():
 
     clock = pygame.time.Clock()
     fps = 60
-
     running = True
     day = Stages.DAY_SPEED
 
-    # All hamsters!
     hamsters = pygame.sprite.Group(Hamster() for _ in range(Constants.HAMSTERS))
-    # and all foods! 
-    foods = pygame.sprite.Group(Food() for _ in range(Constants.FOOD))
 
     while running:
+
+        foods = pygame.sprite.Group(Food() for _ in range(Constants.FOOD))
         
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

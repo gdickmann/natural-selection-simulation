@@ -52,7 +52,6 @@ class Hamster(pygame.sprite.Sprite):
 
     def has_chances_of(self, probability):
         percentage = random.randrange(100)
-        print('Percentage: ', percentage)
         if percentage > probability:
             return True
         return False
