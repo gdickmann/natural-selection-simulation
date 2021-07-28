@@ -19,7 +19,11 @@ def calculate_results(hamsters):
         # If the hamster ate two or more foods, he can reproduce and live.
         if hamster.eaten_food >= 2:
             if hamster.could_reproduce():
-                print('One hamster reproduced!')
+                """TODO: If the hamster can reproduce, it still has a probability of having a faster cub (30% too?). If a faster hamster has a cub, it will automatically be faster then others."""
+                new_hamster = Hamster()
+                new_hamster.speed = pygame.Vector2(Stages.FAST_HAMSTER_SPEED, Stages.FAST_HAMSTER_SPEED)
+
+                hamsters.add(new_hamster)
         # If the hamster didn't eat, he will die.
         if hamster.eaten_food == 0:
             hamster.kill()
@@ -67,13 +71,11 @@ def main():
             for hamster, food in collision.items():
                 hamster.eat(1)
                 food[0].kill()
-                
-            pass
+
 
         calculate_results(hamsters)
 
     pygame.quit()
-
 
 if __name__ == "__main__":
     main()

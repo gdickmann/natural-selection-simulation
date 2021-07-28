@@ -55,7 +55,7 @@ class Hamster(pygame.sprite.Sprite):
     def could_reproduce(self):
         probability = random.randrange(100)
         print('probability: ', str(probability))
-        if probability > 70:
+        if probability > 10:
             return True
         return False
 
