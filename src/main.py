@@ -42,6 +42,7 @@ def calculate_results(hamsters):
                 hamsters.add(new_hamster)
         if hamster.eaten_food == 0:
             hamster.kill()
+            print('A hamster died.')
 
         # In the end of the day, hamsters will be hungry again!
         hamster.eaten_food = 0
