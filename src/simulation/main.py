@@ -9,27 +9,20 @@ from model.hamster import Hamster
 
 from settings.settings import Settings
 
-from data.graphics.plot import PlotGraphic
+from matplotlib import pyplot
 
-def show_mock_graphic():
-    days = [1, 2, 3, 4, 5, 6, 7, 8]
 
-    fast_hamsters = [
-        228, 284, 365, 477, 631, 814, 1044, 1275,
-    ]
-    slow_hamsters = [
-        221, 260, 345, 427, 671, 834, 1024, 1675,
-    ]
-
-    graphic = PlotGraphic(days, fast_hamsters, slow_hamsters)
-    graphic.show_graphics()
+def write_data(fast_hamsters, slow_hamsters):
+    with open('src/simulation/data/results/data.txt', 'a') as output:
+        output.write('[' + str(fast_hamsters) + ', ' + str(slow_hamsters) + ']\n')
+        output.close
 
 
 def day_is_over(count):
     return time.time() > count
 
 
-def calculate_results(hamsters, days):
+def calculate_results(hamsters):
     fast_hamster_count = 0
     slow_hamster_count = 0
     
@@ -68,6 +61,8 @@ def calculate_results(hamsters, days):
 
     print('Fast hamsters: ', str(fast_hamster_count))
     print('Slow hamsters: ', str(slow_hamster_count))
+
+    write_data(fast_hamster_count, slow_hamster_count)
 
 
 def main():    
@@ -110,7 +105,7 @@ def main():
                 hamster.eat(1)
                 food[0].kill()
 
-        calculate_results(hamsters, days)        
+        calculate_results(hamsters)
 
     pygame.quit()
 
