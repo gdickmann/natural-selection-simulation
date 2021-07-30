@@ -1,8 +1,6 @@
 import pygame
 import time
 
-from pygame import constants
-
 from constants.constants import Constants
 from constants.stages import Stages
 
@@ -10,6 +8,14 @@ from model.food import Food
 from model.hamster import Hamster
 
 from settings.settings import Settings
+
+from matplotlib import pyplot
+
+
+def write_data(fast_hamsters, slow_hamsters):
+    with open('src/simulation/data/results/data.txt', 'a') as output:
+        output.write('[' + str(fast_hamsters) + ', ' + str(slow_hamsters) + ']\n')
+        output.close
 
 
 def day_is_over(count):
@@ -56,9 +62,10 @@ def calculate_results(hamsters):
     print('Fast hamsters: ', str(fast_hamster_count))
     print('Slow hamsters: ', str(slow_hamster_count))
 
+    write_data(fast_hamster_count, slow_hamster_count)
 
-def main():
-    
+
+def main():    
     pygame.init()
 
     screen = pygame.display.set_mode((Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT))
@@ -68,7 +75,7 @@ def main():
     clock = pygame.time.Clock()
     fps = 60
     running = True
-    day = Stages.DAY_SPEED
+    days = Stages.DAY_SPEED
 
     hamsters = pygame.sprite.Group(Hamster() for _ in range(Constants.HAMSTERS))
 
@@ -80,7 +87,7 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
 
-        count = time.time() + day
+        count = time.time() + days
         while not day_is_over(count):
 
             hamsters.update()
@@ -97,7 +104,6 @@ def main():
             for hamster, food in collision.items():
                 hamster.eat(1)
                 food[0].kill()
-
 
         calculate_results(hamsters)
 
