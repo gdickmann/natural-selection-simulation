@@ -1,8 +1,6 @@
 import pygame
 import time
 
-from pygame import constants
-
 from constants.constants import Constants
 from constants.stages import Stages
 
@@ -11,12 +9,27 @@ from model.hamster import Hamster
 
 from settings.settings import Settings
 
+from data.graphics.plot import PlotGraphic
+
+def show_mock_graphic():
+    days = [1, 2, 3, 4, 5, 6, 7, 8]
+
+    fast_hamsters = [
+        228, 284, 365, 477, 631, 814, 1044, 1275,
+    ]
+    slow_hamsters = [
+        221, 260, 345, 427, 671, 834, 1024, 1675,
+    ]
+
+    graphic = PlotGraphic(days, fast_hamsters, slow_hamsters)
+    graphic.show_graphics()
+
 
 def day_is_over(count):
     return time.time() > count
 
 
-def calculate_results(hamsters):
+def calculate_results(hamsters, days):
     fast_hamster_count = 0
     slow_hamster_count = 0
     
@@ -57,8 +70,7 @@ def calculate_results(hamsters):
     print('Slow hamsters: ', str(slow_hamster_count))
 
 
-def main():
-    
+def main():    
     pygame.init()
 
     screen = pygame.display.set_mode((Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT))
@@ -68,7 +80,7 @@ def main():
     clock = pygame.time.Clock()
     fps = 60
     running = True
-    day = Stages.DAY_SPEED
+    days = Stages.DAY_SPEED
 
     hamsters = pygame.sprite.Group(Hamster() for _ in range(Constants.HAMSTERS))
 
@@ -80,7 +92,7 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
 
-        count = time.time() + day
+        count = time.time() + days
         while not day_is_over(count):
 
             hamsters.update()
@@ -98,8 +110,7 @@ def main():
                 hamster.eat(1)
                 food[0].kill()
 
-
-        calculate_results(hamsters)
+        calculate_results(hamsters, days)        
 
     pygame.quit()
 
