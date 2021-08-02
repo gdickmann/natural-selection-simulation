@@ -9,29 +9,36 @@ from model.hamster import Hamster
 
 from settings.settings import Settings
 
-from matplotlib import pyplot
 
-
-def write_data(fast_hamsters, slow_hamsters):
-    with open('src/simulation/data/results/data.txt', 'a') as output:
-        output.write('[' + str(fast_hamsters) + ', ' + str(slow_hamsters) + ']\n')
-        output.close
+def print_remaining_hamsters(fast_hamsters, slow_hamsters):
+    print('======= History of hamsters =======')
+    print('Fast hamsters')
+    for fast_hamster in fast_hamsters:
+        print(fast_hamster)
+    print('Slow hamsters')
+    for slow_hamster in slow_hamsters:
+        print(slow_hamster)
+    print('======= History of hamsters =======')
 
 
 def day_is_over(count):
     return time.time() > count
 
 
-def calculate_results(hamsters):
+def calculate_results(hamsters, fast_hamster, slow_hamster):
     fast_hamster_count = 0
     slow_hamster_count = 0
+
+    hamsters_reproduced = 0
+    death_hamsters = 0
     
     for hamster in hamsters:
         # If a hamster eats 2 (or more) foods,
         if hamster.eaten_food >= 2:
              # ... it has a chance of reproduce
             if hamster.has_chances_of(Constants.REPRODUCE):
-                print('A hamster reproduced.')
+                hamsters_reproduced += 1
+
                 new_hamster = Hamster()
 
                 # If a hamster isn't fast already, it will has just a probability of reproduce a faster cub.
@@ -48,24 +55,27 @@ def calculate_results(hamsters):
                 hamsters.add(new_hamster)
         if hamster.eaten_food == 0:
             hamster.kill()
-            print('A hamster died.')
+            death_hamsters += 1
 
         # In the end of the day, hamsters will be hungry again!
         hamster.eaten_food = 0
-
 
         if hamster.is_fast_hamster:
             fast_hamster_count += 1
         else:
             slow_hamster_count += 1
 
+    print(str(hamsters_reproduced) + ' hamster(s) reproduced.')
+    print(str(death_hamsters) + ' hamster(s) died.')
+
     print('Fast hamsters: ', str(fast_hamster_count))
     print('Slow hamsters: ', str(slow_hamster_count))
 
-    write_data(fast_hamster_count, slow_hamster_count)
+    fast_hamster.append(fast_hamster_count)
+    slow_hamster.append(slow_hamster_count)
 
 
-def main():    
+def main():
     pygame.init()
 
     screen = pygame.display.set_mode((Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT))
@@ -75,11 +85,18 @@ def main():
     clock = pygame.time.Clock()
     fps = 60
     running = True
-    days = Stages.DAY_SPEED
+
+    day_speed = Stages.DAY_SPEED
+    day = 1
+
+    fast_hamsters = []
+    slow_hamsters = []
 
     hamsters = pygame.sprite.Group(Hamster() for _ in range(Constants.HAMSTERS))
 
     while running:
+        print('Day ' + str(day) + ' started.')
+        day += 1
 
         foods = pygame.sprite.Group(Food() for _ in range(Constants.FOOD))
         
@@ -87,7 +104,7 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
 
-        count = time.time() + days
+        count = time.time() + day_speed
         while not day_is_over(count):
 
             hamsters.update()
@@ -105,7 +122,8 @@ def main():
                 hamster.eat(1)
                 food[0].kill()
 
-        calculate_results(hamsters)
+        calculate_results(hamsters, fast_hamsters, slow_hamsters)
+        print_remaining_hamsters(fast_hamsters, slow_hamsters)
 
     pygame.quit()
 
