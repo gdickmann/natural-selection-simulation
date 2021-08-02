@@ -10,14 +10,16 @@ from model.hamster import Hamster
 from settings.settings import Settings
 
 
-def print_remaining_hamsters(fast_hamsters, slow_hamsters):
+def print_hamster_history(fast_hamsters, slow_hamsters, days):
     print('======= History of hamsters =======')
     print('Fast hamsters')
     for fast_hamster in fast_hamsters:
-        print(fast_hamster)
+        print(str(fast_hamster) + ',')
     print('Slow hamsters')
     for slow_hamster in slow_hamsters:
-        print(slow_hamster)
+        print(str(slow_hamster) + ',')
+
+    print('Total days: ' + str(days))
     print('======= History of hamsters =======')
 
 
@@ -77,9 +79,8 @@ def calculate_results(hamsters, fast_hamster, slow_hamster):
 
 def main():
     pygame.init()
-
+    
     screen = pygame.display.set_mode((Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT))
-
     Settings.set_default_configurations(pygame)
 
     clock = pygame.time.Clock()
@@ -105,6 +106,8 @@ def main():
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
+                    print_hamster_history(fast_hamsters, slow_hamsters, day)
+
                     pygame.quit()
                     exit()
 
@@ -124,7 +127,6 @@ def main():
                 food[0].kill()
 
         calculate_results(hamsters, fast_hamsters, slow_hamsters)
-        print_remaining_hamsters(fast_hamsters, slow_hamsters)
 
 if __name__ == "__main__":
     main()
