@@ -84,7 +84,6 @@ def main():
 
     clock = pygame.time.Clock()
     fps = 60
-    running = True
 
     day_speed = Stages.DAY_SPEED
     day = 1
@@ -94,18 +93,20 @@ def main():
 
     hamsters = pygame.sprite.Group(Hamster() for _ in range(Constants.HAMSTERS))
 
-    while running:
+    while True:
+        
         print('Day ' + str(day) + ' started.')
         day += 1
 
         foods = pygame.sprite.Group(Food() for _ in range(Constants.FOOD))
-        
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
 
         count = time.time() + day_speed
         while not day_is_over(count):
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    exit()
 
             hamsters.update()
 
@@ -124,8 +125,6 @@ def main():
 
         calculate_results(hamsters, fast_hamsters, slow_hamsters)
         print_remaining_hamsters(fast_hamsters, slow_hamsters)
-
-    pygame.quit()
 
 if __name__ == "__main__":
     main()
