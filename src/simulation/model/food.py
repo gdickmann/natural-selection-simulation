@@ -13,9 +13,7 @@ class Food(pygame.sprite.Sprite):
 		
         self.tick_size = 1
 
-		# Hamster initial position
         self.position = Vector2(random_initial_position(), random_initial_position())
-        # Hamster speed
 
         self.color = (87, 7, 21)
 
