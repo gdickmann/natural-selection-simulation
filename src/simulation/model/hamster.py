@@ -18,13 +18,21 @@ class Hamster(pygame.sprite.Sprite):
         self.speed = Vector2(Stages.SLOW_HAMSTER_SPEED, Stages.SLOW_HAMSTER_SPEED)
 
         self.is_fast_hamster = False
-        self.color = generate_random_color()
+        self.color = Constants.YELLOW
         self.eaten_food = 0
 
         self.image = pygame.Surface((self.size, self.size), pygame.SRCALPHA)
         pygame.draw.circle(self.image, self.color, (self.size // 2, self.size // 2), 20)
 
         self.rect = self.image.get_rect(center = self.position)
+
+
+    def draw(self):
+        self.image = pygame.Surface((self.size, self.size), pygame.SRCALPHA)
+        pygame.draw.circle(self.image, self.color, (self.size // 2, self.size // 2), 20)
+
+        self.rect = self.image.get_rect(center = self.position)
+
 
     def update(self):
         self.speed.rotate_ip(random.gauss(0, 1) * 10)
@@ -59,5 +67,4 @@ class Hamster(pygame.sprite.Sprite):
 
 def generate_random_color():
     is_yellow = random.choice([True, False])
-    return (148, 108, 0) if is_yellow else (14, 48, 97)
-
+    return Constants.YELLOW if is_yellow else Constants.BLUE

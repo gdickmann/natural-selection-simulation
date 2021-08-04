@@ -11,6 +11,7 @@ from settings.settings import Settings
 
 
 def print_hamster_history(fast_hamsters, slow_hamsters, days):
+
     print('======= History of hamsters =======')
     print('Fast hamsters')
     for fast_hamster in fast_hamsters:
@@ -45,17 +46,24 @@ def calculate_results(hamsters, fast_hamster, slow_hamster):
 
                 # If a hamster isn't fast already, it will has just a probability of reproduce a faster cub.
                 if not hamster.is_fast_hamster and hamster.has_chances_of(Constants.BE_A_FASTER_HAMSTER):
-                    print("Fast cub spawned, but the hamster wasn't fast already")
+                    print("Fast cub spawned, but the hamster wasn't fast already")  
+
                     new_hamster.speed = pygame.Vector2(Stages.FAST_HAMSTER_SPEED, Stages.FAST_HAMSTER_SPEED)
+                    new_hamster.color = Constants.BLUE
                     new_hamster.is_fast_hamster = True
+
                 # If a hamster is fast already and can reproduce, it will be automatically a fast hamster.
                 elif hamster.is_fast_hamster:
                     print('Fast cub spawned, the hamster was fast already.')
                     new_hamster.speed = pygame.Vector2(Stages.FAST_HAMSTER_SPEED, Stages.FAST_HAMSTER_SPEED)
+
+                    new_hamster.speed = pygame.Vector2(Stages.FAST_HAMSTER_SPEED, Stages.FAST_HAMSTER_SPEED)
+                    new_hamster.color = Constants.BLUE
                     new_hamster.is_fast_hamster = True
 
+                new_hamster.draw()
                 hamsters.add(new_hamster)
-        if hamster.eaten_food == 0:
+        elif hamster.eaten_food == 0:
             hamster.kill()
             death_hamsters += 1
 
