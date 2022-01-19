@@ -37,67 +37,40 @@ def set_hamsters_quantity(hamsters, fast_hamster, slow_hamster):
     
     for hamster in hamsters:
         # If a hamster eats 2 (or more) foods,
-        if not hamster.is_fast:
-            if hamster.eaten_food >= 2:
-                # ... it has a chance of reproduce
-                if hamster.has_chances_of(Constants.REPRODUCE):
-                    reproduced_hamsters += 1
+        if hamster.eaten_food >= 2:
+            # ... it has a chance of reproduce
+            if hamster.has_chances_of(Constants.REPRODUCE):
+                reproduced_hamsters += 1
 
-                    new_hamster = Hamster()
+                new_hamster = Hamster()
 
-                    # If a hamster isn't fast already, it will has just a probability of reproduce a faster cub.
-                    if not hamster.is_fast and hamster.has_chances_of(Constants.BE_A_FASTER_HAMSTER):
-                        print("Fast cub spawned, but the hamster wasn't fast already")  
+                # If a hamster isn't fast already, it will has just a probability of reproduce a faster cub.
+                if not hamster.is_fast and hamster.has_chances_of(Constants.BE_A_FASTER_HAMSTER):
+                    print("Fast cub spawned, but the hamster wasn't fast already.")  
 
-                        new_hamster.speed = pygame.Vector2(Stages.FAST_HAMSTER_SPEED, Stages.FAST_HAMSTER_SPEED)
-                        new_hamster.color = Constants.BLUE
-                        new_hamster.is_fast = True
-
-                    # If a hamster is fast already and can reproduce, it will be automatically a fast hamster.
-                    elif hamster.is_fast:
-                        print('fuck this')
-                        print('Fast cub spawned, the hamster was fast already.')
-                        new_hamster.speed = pygame.Vector2(Stages.FAST_HAMSTER_SPEED, Stages.FAST_HAMSTER_SPEED)
-
-                        new_hamster.speed = pygame.Vector2(Stages.FAST_HAMSTER_SPEED, Stages.FAST_HAMSTER_SPEED)
-                        new_hamster.color = Constants.BLUE
-                        new_hamster.is_fast = True
+                    new_hamster.speed = pygame.Vector2(Stages.FAST_HAMSTER_SPEED, Stages.FAST_HAMSTER_SPEED)
+                    new_hamster.color = Constants.BLUE
+                    new_hamster.is_fast = True
 
                     new_hamster.draw()
                     hamsters.add(new_hamster)
-            elif hamster.eaten_food == 0:
-                hamster.kill()
-                dead_hamsters += 1
-        else:
-            if hamster.eaten_food >= 2:
-                # ... it has a chance of reproduce
-                if hamster.has_chances_of(Constants.REPRODUCE):
-                    reproduced_hamsters += 1
 
-                    new_hamster = Hamster()
+                # If a hamster is fast already and can reproduce, it will be automatically a fast hamster.
+                elif hamster.is_fast:
+                    print('Fast cub spawned, the hamster was fast already.')
+                    new_hamster.speed = pygame.Vector2(Stages.FAST_HAMSTER_SPEED, Stages.FAST_HAMSTER_SPEED)
 
-                    # If a hamster isn't fast already, it will has just a probability of reproduce a faster cub.
-                    if not hamster.is_fast and hamster.has_chances_of(Constants.BE_A_FASTER_HAMSTER):
-                        print("Fast cub spawned, but the hamster wasn't fast already")  
-
-                        new_hamster.speed = pygame.Vector2(Stages.FAST_HAMSTER_SPEED, Stages.FAST_HAMSTER_SPEED)
-                        new_hamster.color = Constants.BLUE
-                        new_hamster.is_fast = True
-
-                    # If a hamster is fast already and can reproduce, it will be automatically a fast hamster.
-                    elif hamster.is_fast:
-                        print('Fast cub spawned, the hamster was fast already.')
-                        new_hamster.speed = pygame.Vector2(Stages.FAST_HAMSTER_SPEED, Stages.FAST_HAMSTER_SPEED)
-
-                        new_hamster.speed = pygame.Vector2(Stages.FAST_HAMSTER_SPEED, Stages.FAST_HAMSTER_SPEED)
-                        new_hamster.color = Constants.BLUE
-                        new_hamster.is_fast = True
+                    new_hamster.speed = pygame.Vector2(Stages.FAST_HAMSTER_SPEED, Stages.FAST_HAMSTER_SPEED)
+                    new_hamster.color = Constants.BLUE
+                    new_hamster.is_fast = True
 
                     new_hamster.draw()
                     hamsters.add(new_hamster)
-            elif hamster.eaten_food < 4:
-                hamster.kill()
-                dead_hamsters += 1
+
+        # If a hamster doesn't eat anything, it will die.
+        elif hamster.eaten_food == 0:
+            hamster.kill()
+            dead_hamsters += 1
 
         # In the end of the day, hamsters will be hungry again!
         hamster.eaten_food = 0
@@ -167,6 +140,7 @@ def main():
                 food[0].kill()
 
         set_hamsters_quantity(hamsters, fast_hamsters, slow_hamsters)
+
 
 if __name__ == "__main__":
     main()
