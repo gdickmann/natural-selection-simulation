@@ -1,3 +1,4 @@
+from resource import prlimit
 import pygame
 import time
 
@@ -11,7 +12,7 @@ from settings.settings import Settings
 
 
 def print_hamster_history(fast_hamsters, slow_hamsters, days):
-
+    print('')
     print('======= History of hamsters =======')
     print('Fast hamsters')
     for fast_hamster in fast_hamsters:
@@ -46,7 +47,7 @@ def set_hamsters_quantity(hamsters, fast_hamster, slow_hamster):
 
                 # If a hamster isn't fast already, it will has just a probability of reproduce a faster cub.
                 if not hamster.is_fast and hamster.has_chances_of(Constants.BE_A_FASTER_HAMSTER):
-                    print("Fast cub spawned, but the hamster wasn't fast already.")  
+                    print("Fast cub spawned by a slow hamster.")  
 
                     new_hamster.speed = pygame.Vector2(Stages.FAST_HAMSTER_SPEED, Stages.FAST_HAMSTER_SPEED)
                     new_hamster.color = Constants.BLUE
@@ -57,7 +58,7 @@ def set_hamsters_quantity(hamsters, fast_hamster, slow_hamster):
 
                 # If a hamster is fast already and can reproduce, it will be automatically a fast hamster.
                 elif hamster.is_fast:
-                    print('Fast cub spawned, the hamster was fast already.')
+                    print('Fast cub spawned by a fast hamster.')
                     new_hamster.speed = pygame.Vector2(Stages.FAST_HAMSTER_SPEED, Stages.FAST_HAMSTER_SPEED)
 
                     new_hamster.speed = pygame.Vector2(Stages.FAST_HAMSTER_SPEED, Stages.FAST_HAMSTER_SPEED)
@@ -80,7 +81,8 @@ def set_hamsters_quantity(hamsters, fast_hamster, slow_hamster):
         else:
             slow_hamster_count += 1
 
-    print(str(reproduced_hamsters) + ' hamster(s) reproduced.')
+    print('')
+    print(str(reproduced_hamsters) + ' hamster(s) reproduced and ' + str(dead_hamsters) + ' hamster(s) died.')
     print(str(dead_hamsters) + ' hamster(s) died.')
 
     print('Fast hamsters: ', str(fast_hamster_count))
@@ -108,7 +110,7 @@ def main():
     hamsters = pygame.sprite.Group(Hamster() for _ in range(Constants.HAMSTERS))
 
     while True:
-        
+        print('')
         print('Day ' + str(day) + ' started.')
         day += 1
 
