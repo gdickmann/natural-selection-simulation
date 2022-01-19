@@ -17,7 +17,7 @@ class Hamster(pygame.sprite.Sprite):
         self.position = Vector2(Constants.HAMSTER_X_POSITION, Constants.HAMSTER_Y_POSITION)
         self.speed = Vector2(Stages.SLOW_HAMSTER_SPEED, Stages.SLOW_HAMSTER_SPEED)
 
-        self.is_fast_hamster = False
+        self.is_fast = False
         self.color = Constants.YELLOW
         self.eaten_food = 0
 

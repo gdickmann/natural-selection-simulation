@@ -9,22 +9,22 @@ class Graphic:
     4,
     4,
     4,
+    4,
     3,
     3,
     3,
-    1,
-    1,
-    1]
+    2,
+    2,]
     fast_hamsters = [0,
+    0,
+    2,
+    1,
     1,
     1,
     2,
-    4,
-    6,
-    9,
-    12,
-    15,
-    14]
+    2,
+    2,
+    1,]
 
     pyplot.plot(x, fast_hamsters)
     pyplot.plot(x, slow_hamsters)
