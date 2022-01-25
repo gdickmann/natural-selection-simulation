@@ -16,7 +16,7 @@ def print_hamster_history(fast_hamsters, slow_hamsters, days):
     print('======= History of hamsters =======')
     print('Fast hamsters')
     for fast_hamster in fast_hamsters:
-        print(str(fast_hamster) + ',')
+        print(str(fast_hamster) + '.')
     print('Slow hamsters')
     for slow_hamster in slow_hamsters:
         print(str(slow_hamster) + ',')
@@ -56,8 +56,18 @@ def set_hamsters_quantity(hamsters, fast_hamster, slow_hamster):
                     new_hamster.draw()
                     hamsters.add(new_hamster)
 
+                else:
+                    print('Slow cub spawned by a slow hamster.')
+
+                    new_hamster.speed = pygame.Vector2(Stages.SLOW_HAMSTER_SPEED, Stages.SLOW_HAMSTER_SPEED)
+                    new_hamster.color = Constants.YELLOW
+                    new_hamster.is_fast = False
+
+                    new_hamster.draw()
+                    hamsters.add(new_hamster)
+
                 # If a hamster is fast already and can reproduce, it will be automatically a fast hamster.
-                elif hamster.is_fast:
+                if hamster.is_fast:
                     print('Fast cub spawned by a fast hamster.')
                     new_hamster.speed = pygame.Vector2(Stages.FAST_HAMSTER_SPEED, Stages.FAST_HAMSTER_SPEED)
 
@@ -83,7 +93,6 @@ def set_hamsters_quantity(hamsters, fast_hamster, slow_hamster):
 
     print('')
     print(str(reproduced_hamsters) + ' hamster(s) reproduced and ' + str(dead_hamsters) + ' hamster(s) died.')
-    print(str(dead_hamsters) + ' hamster(s) died.')
 
     print('Fast hamsters: ', str(fast_hamster_count))
     print('Slow hamsters: ', str(slow_hamster_count))
