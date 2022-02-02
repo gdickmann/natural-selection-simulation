@@ -3,6 +3,7 @@ class Constants:
     # Hamster colors
     BLUE = (14, 48, 97)
     YELLOW = (148, 108, 0)
+    GREEN = (0, 59, 20)
     # Screen size
     SCREEN_WIDTH = 1000
     SCREEN_HEIGHT = 750
@@ -23,4 +24,5 @@ class Constants:
     FOOD = 50
     # Probabilities
     REPRODUCE = 70
-    BE_A_FASTER_HAMSTER = 20
+    BE_A_BLUE_HAMSTER = 20
+    BE_A_GREEN_HAMSTER = 20
