@@ -1,5 +1,5 @@
 draft/
 gallery/
-src/statistic
+src/statistic/graphic.py
 __pycache__/
 *.pyc
