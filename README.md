@@ -215,7 +215,7 @@ Com esse resultado, podemos deduzir duas coisas: há um padrão onde, em média,
 
 Se o tempo em que os dias passam fosse modificado (+10 segundos, por exemplo), o resultado com certeza seria diferente. O mesmo vale caso mais comidas fossem adicionadas ao cenário.
 
-### Conclusão
+## Conclusão
 
 No fim, a Wikipedia tem razão ao afirmar que _"características favoráveis que são
 hereditárias tornam-se mais comuns em gerações sucessivas de uma população de organismos que se reproduzem, e que características desfavoráveis que são
